@@ -1,1 +1,1 @@
-
+CMD echo „Hello world“
