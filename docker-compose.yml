@@ -1,19 +1,22 @@
 version: "3"
 services:
-  web:
-    # replace username/repo:tag with your name and image details
-    image: lenare/test:latest
-    deploy:
-      replicas: 5
-      resources:
-        limits:
-          cpus: "0.1"
-          memory: 50M
-      restart_policy:
-        condition: on-failure
+  test1:
+    image: lenare/testproject:latest
     ports:
       - "4000:80"
-    networks:
-      - webnet
-networks:
-  webnet:
+  test2:
+    image: lenare/testproject:latest
+    ports:
+      - "4001:81"
+  test3:
+    image: lenare/testproject:latest
+    ports:
+      - "4002:82"
+  test4:
+    image: lenare/testproject:latest
+    ports:
+      - "4003:83"
+  test5:
+    image: lenare/testproject:latest
+    ports:
+      - "4004:84"
