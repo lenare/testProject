@@ -1,22 +1,9 @@
-version: "3"
+version: "2"
 services:
-  test1:
-    image: lenare/testproject:latest
-    ports:
-      - "4000:80"
-  test2:
-    image: lenare/testproject:latest
-    ports:
-      - "4001:81"
-  test3:
-    image: lenare/testproject:latest
-    ports:
-      - "4002:82"
-  test4:
-    image: lenare/testproject:latest
-    ports:
-      - "4003:83"
-  test5:
-    image: lenare/testproject:latest
-    ports:
-      - "4004:84"
+  producer:
+    build: producer/.
+    network_mode: host
+
+  consumer:
+    build: consumer/.
+    network_mode: host
