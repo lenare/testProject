@@ -22,10 +22,10 @@ def acked(err, msg):
 
 myGen = Faker()
 
-p = Producer({'bootstrap.servers': 'localhost:9092'})
+p = Producer({'bootstrap.servers': 'localhost:29092'})
 
 try:
-    for i in range (1,15):
+    while True:
         name = myGen.first_name()
         # print(name)
         p.produce('testtopic', name, callback=acked)

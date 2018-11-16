@@ -1,10 +1,10 @@
 import logging, queue
 from confluent_kafka import Consumer, KafkaError
 
-logging.basicConfig(filename = 'test.log', filemode = 'w', level = logging.INFO)
+logging.basicConfig(format = '%(asctime)-12s %(levelname)-8s %(message)s', datefmt='%m-%d %H:%M', filename = 'test.log', filemode = 'w', level = logging.INFO)
 
 settings = {
-    'bootstrap.servers': 'localhost:9092',
+    'bootstrap.servers': 'localhost:29092',
     'group.id': 'mygroup',
     'client.id': 'client-1',
     'enable.auto.commit': True,
@@ -25,12 +25,13 @@ def name_to_dictionary(name):
         names[name] += 1
 
 def print_top_10_names(dict):
-    print("top10")
     pq = queue.PriorityQueue()
 
     for name, count in dict.items():
         pq.put((-count, name))
+
     for i in range(1, 10):
+
         print("{0}. {1}".format(i, pq.get()))
 
 try:
@@ -42,7 +43,7 @@ try:
             name = msg.value().decode("utf-8")
             logging.info("Message received: {0}".format(name))
             name_to_dictionary(name)
-            print(names)
+            #print(name)
         elif msg.error().code() == KafkaError._PARTITION_EOF:
             logging.error('End of partition reached {0}/{1}'
                   .format(msg.topic(), msg.partition()))
