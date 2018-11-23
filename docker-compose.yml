@@ -4,6 +4,5 @@ services:
     build: producer/.
     network_mode: host
 
-  consumer:
-    build: consumer/.
-    network_mode: host
+  
+

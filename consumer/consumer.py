@@ -4,7 +4,7 @@ from confluent_kafka import Consumer, KafkaError
 logging.basicConfig(format = '%(asctime)-12s %(levelname)-8s %(message)s', datefmt='%m-%d %H:%M', filename = '../test.log', filemode = 'w', level = logging.INFO)
 
 settings = {
-    'bootstrap.servers': '172.21.126.47:29092',
+    'bootstrap.servers': 'localhost:29092',
     'group.id': 'mygroup',
     'client.id': 'client-1',
     'enable.auto.commit': True,
@@ -56,3 +56,5 @@ except KeyboardInterrupt:
 
 finally:
     c.close()
+
+#172.21.126.47
