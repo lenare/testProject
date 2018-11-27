@@ -9,12 +9,12 @@ settings = {
     'client.id': 'client-1',
     'enable.auto.commit': True,
     'session.timeout.ms': 6000,
-    'default.topic.config': {'auto.offset.reset': 'smallest'}
+    'default.topic.config': {'auto.offset.reset': 'earliest'}
 }
 
 c = Consumer(settings)
 
-c.subscribe(['testtopic'])
+c.subscribe(['countednames'])
 
 names = {}
 
@@ -40,14 +40,15 @@ try:
         if msg is None:
             continue
         elif not msg.error():
-            name = msg.value().decode("utf-8")
-            logging.info("Message received: {0}".format(name))
-            name_to_dictionary(name)
+            name = msg.key().decode("utf-8")
+            counts = msg.value()
+            print("Message received: {0}, {1}".format(name, ord(counts)))
+            #name_to_dictionary(name)
             #print(name)
         elif msg.error().code() == KafkaError._PARTITION_EOF:
             logging.error('End of partition reached {0}/{1}'
                   .format(msg.topic(), msg.partition()))
-            print_top_10_names(names)
+            #print_top_10_names(names)
         else:
             logging.error('Error occured: {0}'.format(msg.error().str()))
 
@@ -56,5 +57,3 @@ except KeyboardInterrupt:
 
 finally:
     c.close()
-
-#172.21.126.47

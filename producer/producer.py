@@ -2,6 +2,8 @@ import logging
 import random
 import json
 import uuid
+import time
+import arrow
 from faker import Faker
 from confluent_kafka import Producer
 
@@ -32,8 +34,10 @@ try:
         age = random.randint(18, 100)
         value["name"] = name
         value["age"] = age
+        value["time"] = str(arrow.utcnow())
         p.produce('testnames', key = name, value = json.dumps(value), callback = acked)
         p.poll(0.5)
+        time.sleep(5)
 except KeyboardInterrupt:
     pass
 
