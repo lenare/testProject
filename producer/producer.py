@@ -11,7 +11,7 @@ logging.basicConfig(format = '%(asctime)-12s %(levelname)-8s %(message)s',
                     datefmt = '%m-%d %H:%M', filename = '../test.log', filemode = 'w', level = logging.INFO)
 
 
-p = Producer({'bootstrap.servers': 'lenrei-thinkpad-t480s.witt-ad.wittgruppe.eu:29092'})
+p = Producer({'bootstrap.servers': 'localhost:29092'})
 
 
 def acked(err, msg):
